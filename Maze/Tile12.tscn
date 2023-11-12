@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmo26xsbkhtxv"]
+
+[ext_resource type="Material" uid="uid://bwshngemowpoj" path="res://Maze/Wall.tres" id="1_5jax3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_imfma"]
+material = ExtResource("1_5jax3")
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w4v7a"]
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o1uqk"]
+material = ExtResource("1_5jax3")
+size = Vector3(0.1, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8kp8f"]
+size = Vector3(0.1, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v776v"]
+material = ExtResource("1_5jax3")
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2w42"]
+size = Vector3(2, 0.1, 2)
+
+[node name="Tile" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="S" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+mesh = SubResource("BoxMesh_imfma")
+
+[node name="S_Collision" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+shape = SubResource("BoxShape3D_w4v7a")
+
+[node name="W" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+mesh = SubResource("BoxMesh_o1uqk")
+
+[node name="W_Collision" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+shape = SubResource("BoxShape3D_8kp8f")
+
+[node name="Ground" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_v776v")
+
+[node name="Ground_Collision" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_v2w42")
