@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqm1v7v7i5qhe"]
+
+[ext_resource type="Script" path="res://Gun.gd" id="1_cf8sf"]
+[ext_resource type="ArrayMesh" uid="uid://beqc80wx78g15" path="res://Assets/shotgun.obj" id="1_s357e"]
+[ext_resource type="ArrayMesh" uid="uid://cmal10q6s7cwe" path="res://Assets/muzzleflash.obj" id="2_rbeno"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ihynd"]
+load_path = "res://.godot/imported/muzzleflash.png-532310c90dbae6ec0af5097f679c8e00.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmb4w"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.992157, 0.941176, 1)
+albedo_texture = SubResource("CompressedTexture2D_ihynd")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_skryj"]
+load_path = "res://.godot/imported/muzzleflash.png-532310c90dbae6ec0af5097f679c8e00.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qytgp"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.992157, 0.941176, 1)
+albedo_texture = SubResource("CompressedTexture2D_skryj")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bfb5s"]
+load_path = "res://.godot/imported/muzzleflash.png-532310c90dbae6ec0af5097f679c8e00.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu34w"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0.992157, 0.941176, 1)
+albedo_texture = SubResource("CompressedTexture2D_bfb5s")
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_cf8sf")
+
+[node name="Shotgun" type="MeshInstance3D" parent="."]
+transform = Transform3D(-20, 0, -1.74846e-06, 0, 20, 0, 1.74846e-06, 0, -20, 0.421, 2.15081, -0.919279)
+mesh = ExtResource("1_s357e")
+skeleton = NodePath("../..")
+
+[node name="Muzzle" type="Node3D" parent="."]
+visible = false
+
+[node name="Muzzleflash" type="MeshInstance3D" parent="Muzzle"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 1, 0.407344, 2.29884, -1.90925)
+mesh = ExtResource("2_rbeno")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_nmb4w")
+surface_material_override/1 = SubResource("StandardMaterial3D_qytgp")
+surface_material_override/2 = SubResource("StandardMaterial3D_fu34w")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Muzzle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381398, 2.4383, -1.93142)
+light_color = Color(1, 0.756863, 0.337255, 1)
+omni_range = 289.598
+omni_attenuation = 1.6245
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Aim" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.5, 0.302)
+target_position = Vector3(2.08165e-12, 2.08165e-12, -40)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 1, 0, 1)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

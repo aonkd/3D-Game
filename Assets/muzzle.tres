@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cmcywxfvgmoe3"]
+
+[ext_resource type="Texture2D" uid="uid://dgbg2mng761s8" path="res://Assets/muzzleflash.png" id="1_ydusy"]
+
+[resource]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.992157, 0.941176, 1)
+albedo_texture = ExtResource("1_ydusy")
